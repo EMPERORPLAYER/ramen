@@ -1,0 +1,30 @@
+{
+  "HB-TEST1": {
+    "id": "HB-TEST1",
+    "provider": "mono",
+    "amount": 60000,
+    "currency": "UAH",
+    "description": "RAMEN HABARU - HB-TEST1",
+    "items": [
+      {
+        "name": "Cukida Shoyu",
+        "qty": 2,
+        "price": 30000,
+        "sum": 60000
+      }
+    ],
+    "customer": {
+      "name": "Test User",
+      "phone": "+380671112233",
+      "address": "test",
+      "note": ""
+    },
+    "successUrl": "http://127.0.0.1:8080/?paid=HB-TEST1",
+    "failUrl": "http://127.0.0.1:8080/?failed=HB-TEST1",
+    "status": "demo",
+    "mode": "demo",
+    "createdAt": "2026-10-08T10:25:25.844Z",
+    "updatedAt": "2026-10-08T10:25:25.844Z",
+    "reason": "MONO_TOKEN не задано"
+  }
+}

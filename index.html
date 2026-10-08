@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAMEN らーめん · Хабару Рамен House</title>
+<meta name="description" content="Хабару Рамен House — автентичний японський ресторан рамену. Свіжий ремісничий рамен, власні бульйони та кіптінг-etsuкі 24 години.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- SVG defs: brush stroke / noise -->
+<svg class="svg-defs" aria-hidden="true">
+  <defs>
+    <filter id="inkRough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="sakura-layer" id="sakuraLayer" aria-hidden="true"></div>
+
+<!-- ============ NOREN (curtain) ============ -->
+<div class="noren" aria-hidden="true">
+  <div class="noren-panel">らーめん</div>
+  <div class="noren-panel">一福</div>
+  <div class="noren-panel">一番</div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <a class="brand" href="#top">
+    <span class="brand-seal">一</span>
+    <span class="brand-text">
+      <b>RAMEN</b>
+      <i>らーめん · Хабару</i>
+    </span>
+  </a>
+
+  <nav class="nav" id="nav">
+    <a href="#menu" class="nav-link">Меню</a>
+    <a href="#story" class="nav-link">Історія</a>
+    <a href="#gallery" class="nav-link">Галерея</a>
+    <a href="#reviews" class="nav-link">Відгуки</a>
+    <a href="#reserve" class="nav-link">Бронювання</a>
+    <a href="#reserve" class="nav-cta">Забронювати стіл</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="cart-btn" id="cartBtn" aria-label="Відкрити кошик" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6.5h16l-1.35 9.4a2 2 0 0 1-1.98 1.72H7.33a2 2 0 0 1-1.98-1.72L4 6.5Z"/>
+        <path d="M9 6.5V5.2A3 3 0 0 1 12 2.2a3 3 0 0 1 3 3v1.3"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" hidden>0</span>
+      <span class="cart-btn-underline"></span>
+    </button>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-sun"></div>
+    <div class="hero-mountain m1"></div>
+    <div class="hero-mountain m2"></div>
+    <div class="hero-mountain m3"></div>
+    <div class="hero-torii">
+      <span class="torii-top"></span>
+      <span class="torii-pillar p1"></span>
+      <span class="torii-pillar p2"></span>
+      <span class="torii-beam"></span>
+    </div>
+    <div class="hero-lantern">
+      <span class="lantern-body"><b>ら</b><b>ー</b><b>め</b><b>ん</b></span>
+    </div>
+    <div class="hero-wave"></div>
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-vert" aria-hidden="true">京都の味</p>
+    <p class="hero-kicker reveal">らーめん · Japanese soul in a bowl</p>
+    <h1 class="hero-title">
+      <span class="line"><span>РАМЕН</span></span>
+      <span class="line"><span class="jp">らーめん</span></span>
+    </h1>
+    <p class="hero-lead reveal">
+      18 годин кипіння кісткового бульйону, 12 годин витримки лапшени та
+      жменя Nori з гірського моря. Кожна миска готується в момент замовлення.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#menu" class="btn btn-primary">Переглянути меню</a>
+      <a href="#reserve" class="btn btn-ghost">Забронювати стіл</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><b data-count="18">0</b><span>годин бульйону</span></div>
+      <div class="stat"><b data-count="12">0</b><span>видів рамену</span></div>
+      <div class="stat"><b data-count="24">0</b><span>години роботи</span></div>
+    </div>
+  </div>
+
+  <!-- CSS ramen bowl -->
+  <div class="bowl-scene" aria-hidden="true">
+    <div class="steam">
+      <span class="s1"></span><span class="s2"></span><span class="s3"></span>
+    </div>
+    <div class="chopsticks"><span></span><span></span></div>
+    <div class="bowl">
+      <div class="broth">
+        <span class="oil o1"></span><span class="oil o2"></span><span class="oil o3"></span>
+        <span class="nori n1"></span><span class="nori n2"></span>
+        <span class="egg"></span>
+        <span class="chashu"></span>
+        <span class="naruto"></span>
+        <span class="noodle n1"></span><span class="noodle n2"></span><span class="noodle n3"></span>
+        <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>
+      </div>
+      <div class="bowl-rim"></div>
+      <div class="bowl-body"></div>
+      <div class="bowl-pattern"></div>
+    </div>
+  </div>
+
+  <a href="#menu" class="scroll-hint" aria-label="Гортати вниз"><span></span></a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>味噌</span><span>醤油</span><span>豚骨</span><span>塩</span><span>辛味噌</span><span>餃子</span><span>抹茶</span><span>大盛</span>
+    <span>味噌</span><span>醤油</span><span>豚骨</span><span>塩</span><span>辛味噌</span><span>餃子</span><span>抹茶</span><span>avin</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <div class="about-frame">
+        <div class="ink-circle"></div>
+        <div class="about-char">魂</div>
+        <div class="about-seal">一福</div>
+      </div>
+      <div class="about-vert" aria-hidden="true">一 期 一 会</div>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow reveal">Про ресторан</p>
+      <h2 class="title reveal">Ідеальна миска<br>починається з води</h2>
+      <p class="reveal">
+        <b>Хабару Рамен House</b> — це камерний ресторан на 18 місць у серці міста.
+        Ми варимо все самі: від бульйону до лапшени. Жодних напівфабрикатів,
+        жодних приправ із пакетиків — лише кіптінг-etsuкі та 14 годин терпіння.
+      </p>
+      <p class="reveal">
+        Наш шеф-кухар <b>Кентаро Ватанабе</b> виріс у Кіото, де рамен вважають
+        повноцінною їжею, а не закускою. Він привіз сюди рецепти своєї бабусі
+        та щодня перевіряє кожен вар, який замовляють гості.
+      </p>
+      <ul class="about-list">
+        <li class="reveal"><b>18 год</b><span>кипіння кісткового бульйону</span></li>
+        <li class="reveal"><b>14 год</b><span>витримки тіста для локшини</span></li>
+        <li class="reveal"><b>7 днів</b><span>ферментації соленої маринованої капусти</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="section menu" id="menu">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow reveal"> меню </p>
+      <h2 class="title reveal">Дванадцять смаків рамену</h2>
+      <p class="sec-sub reveal">Оберіть базу — і ми додамо інгуредієнти за вашим бажанням.</p>
+    </header>
+
+    <div class="filters reveal" role="tablist" aria-label="Фільтр меню">
+      <button class="filter is-active" data-filter="all" role="tab">Усі</button>
+      <button class="filter" data-filter="shoyu" role="tab">醤油 Shoyu</button>
+      <button class="filter" data-filter="miso" role="tab">味噌 Miso</button>
+      <button class="filter" data-filter="tonkotsu" role="tab">豚骨 Tonkotsu</button>
+      <button class="filter" data-filter="spicy" role="tab">辛 Spicy</button>
+      <button class="filter" data-filter="side" role="tab">Страви</button>
+    </div>
+
+    <div class="cards" id="menuGrid">
+      <article class="card reveal" data-cat="shoyu" tabindex="0">
+        <div class="card-art art-shoyu"><span class="kanji">醤</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Цукіда Сьою</h3><span class="price">280 ₴</span></div>
+          <p class="jp-name">醤油ラーメン</p>
+          <p>Прозорий курячий бульйон 12 годин, соєвий соус домашньої ферментації, пророщена цибуля.</p>
+          <ul class="tags"><li>легкий</li><li>класика</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="miso" tabindex="0">
+        <div class="card-art art-miso"><span class="kanji">味</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Акіта Місо</h3><span class="price">320 ₴</span></div>
+          <p class="jp-name">味噌ラーメン</p>
+          <p>Місо з ферментації 12 місяців, куряче масло, кукурудза, листя гарбузи.</p>
+          <ul class="tags"><li>насичений</li><li>солодкуватий</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="tonkotsu" tabindex="0">
+        <div class="card-art art-tonkotsu"><span class="kanji">骨</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Кумамото Тонкотсу</h3><span class="price">360 ₴</span></div>
+          <p class="jp-name">豚骨ラーメン</p>
+          <p>Каоліновий крем-бульйон 18 годин, шматки свинини, японський сірісний огірок.</p>
+          <ul class="tags"><li>густий</li><li>жирний</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="spicy" tabindex="0">
+        <div class="card-art art-spicy"><span class="kanji">辛</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Токіо Така Но Цуй</h3><span class="price">340 ₴</span></div>
+          <p class="jp-name">担々麺</p>
+          <p>Час-тукей з двома видами чилі, кунжутна паста, обсмажене свиняче фарше.</p>
+          <ul class="tags"><li>гострий</li><li>3/5</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="shoyu" tabindex="0">
+        <div class="card-art art-shio"><span class="kanji">塩</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Хоккайдо Сьо</h3><span class="price">390 ₴</span></div>
+          <p class="jp-name">塩ラーメン</p>
+          <p>Морська сіль і моті-ічі, замість свинини — м’ясо мангольного молочка, м’який смак.</p>
+          <ul class="tags"><li>делікатний</li><li>прозорий</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="miso" tabindex="0">
+        <div class="card-art art-miso2"><span class="kanji">豚</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Тондзудзуй</h3><span class="price">350 ₴</span></div>
+          <p class="jp-name">豚味噌</p>
+          <p>Дві бази в одній мисці: тонкотсу і червоний місо, з водоспадом жиру на поверхні.</p>
+          <ul class="tags"><li>баджі</li><li>хіт</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="spicy" tabindex="0">
+        <div class="card-art art-tsuke"><span class="kanji">漬</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Цукемен</h3><span class="price">310 ₴</span></div>
+          <p class="jp-name">つけ麺</p>
+          <p>Холодна локшина в’язкості спагетті, гарячий соус-бульйон для макання в три заходи.</p>
+          <ul class="tags"><li>густий соус</li><li>інтерактивно</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="spicy" tabindex="0">
+        <div class="card-art art-veggie"><span class="kanji">菜</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Сьодзі вегетаріан</h3><span class="price">300 ₴</span></div>
+          <p class="jp-name">菜麺</p>
+          <p>Бульйон із кіптінг-оку, жасминовий рис, сезонні овочі, кунжут, соєвий крем.</p>
+          <ul class="tags"><li>вегетаріан</li><li>легкий</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" data-cat="side" tabindex="0">
+        <div class="card-art art-gyoza"><span class="kanji">餃</span></div>
+        <div class="card-body">
+          <div class="card-top"><h3>Гьодза (6 шт)</h3><span class="price">150 ₴</span></div>
+          <p class="jp-name">餃子</p>
+          <p>Обсмажені в чавунній сковороді, тонке тісто з соковим гарячим соусом.</p>
+          <ul class="tags"><li>закуска</li></ul>
+          <div class="card-foot">
+            <button class="add" type="button">У кошик</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY / PROCESS ============ -->
+<section class="section story" id="story">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow reveal">Процес</p>
+      <h2 class="title reveal">Шість кроків до миски</h2>
+    </header>
+    <ol class="steps" id="steps">
+      <li class="step reveal">
+        <span class="step-num">壱</span>
+        <h3>Вода та кістки</h3>
+        <p>Свиняча та куряча кістки прокидають 18 годин, поки колаген не перетвориться на желатин.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">弐</span>
+        <h3>Ароматний комі</h3>
+        <p>Куряче та свиняче філе, кедрова дошка, качамук і шість видів гострих перців — натягуємо смак.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">参</span>
+        <h3>Тісто</h3>
+        <p>Борошно, вода, селю, содовий карбонат. Витримка в холодильнику від 12 до 24 годин.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">肆</span>
+        <h3>Ніж-різання</h3>
+        <p>Локшину ріжемо вручну по 4-5 локшин. Машина замовляється — руками виходить інакше.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">伍</span>
+        <h3>Тарелка</h3>
+        <p>Чаша, соєвий соус, кунжутна олія, а раніше — таці, наруі, зелений цибуль, кіптінг-цу.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">陸</span>
+        <h3>Подача</h3>
+        <p>Окроп з підігрівом наливаємо перед гостями. Їсти треба негайно — рамен не чекає.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section gallery" id="gallery">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow reveal">Галерея</p>
+      <h2 class="title reveal">Інтер’єр та інгредієнти</h2>
+    </header>
+  </div>
+  <div class="gal" id="gal">
+    <figure class="gal-item g1 reveal"><div class="gal-art"></div><figcaption>Цех кухні · 開店</figcaption></figure>
+    <figure class="gal-item g2 reveal"><div class="gal-art"></div><figcaption>18 годин бульйону · 出汁</figcaption></figure>
+    <figure class="gal-item g3 reveal"><div class="gal-art"></div><figcaption>Лапшена ручної нарізки · 手打ち</figcaption></figure>
+    <figure class="gal-item g4 reveal"><div class="gal-art"></div><figcaption>Стіл на двох · 一期一会</figcaption></figure>
+    <figure class="gal-item g5 reveal"><div class="gal-art"></div><figcaption>Чайна церемонія · お茶</figcaption></figure>
+    <figure class="gal-item g6 reveal"><div class="gal-art"></div><figcaption>Миски майстра · 器</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow reveal">Відгуки</p>
+      <h2 class="title reveal">Що кажуть гості</h2>
+    </header>
+    <div class="rev-track" id="revTrack">
+      <blockquote class="rev"><p>«Найкращий тонкотсу, який я їла поза Японією. Бульйон такий густий, що ложка стоїть. Але це не «смачно» — це подія.»</p><footer>Олена К. · Google</footer></blockquote>
+      <blockquote class="rev"><p>«Замовили столик на 8. Лампи з ночіми-папером, тиха музика, відчуваєш себе в смітбамі. Персонал пояснив кожну інгредієнт.»</p><footer>Андрій Т. · TripAdvisor</footer></blockquote>
+      <blockquote class="rev"><p>«Рамен з 22:00, після роботи — ідеально. Офіціант навіть показав, як правильно їсти гіоza без розливу.»</p><footer>Ігор П. · Google</footer></blockquote>
+      <blockquote class="rev"><p>«Замовили веганський, його принесли без запиту. Підсів шеф і розповів про ферментацію місо. Ціна логічна, смак — пам’ять на роки.»</p><footer>Мар’яна Д. · Instagram</footer></blockquote>
+    </div>
+    <div class="rev-ctrl">
+      <button class="rev-btn" id="revPrev" aria-label="Попередній відгук">←</button>
+      <div class="rev-dots" id="revDots"></div>
+      <button class="rev-btn" id="revNext" aria-label="Наступний відгук">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVATION ============ -->
+<section class="section reserve" id="reserve">
+  <div class="wrap reserve-grid">
+    <div class="reserve-info">
+      <p class="eyebrow reveal">Бронювання</p>
+      <h2 class="title reveal">Заповніть<br>表中</h2>
+      <p class="reveal">Ми приймаємо гостей щодня <b>з 11:00 до 23:00</b>. У п’ятницю та суботу — бронювання обов’язкове.</p>
+      <ul class="info-list">
+        <li class="reveal"><b>Адреса</b><span>вул. Сакура, 12 · другий поверх з вікном на сад</span></li>
+        <li class="reveal"><b>Телефон</b><span><a href="tel:+380441234567">+380 44 123 45 67</a></span></li>
+        <li class="reveal"><b>Пошта</b><span><a href="mailto:hello@habaru.ramen">hello@habaru.ramen</a></span></li>
+        <li class="reveal"><b>Wi-Fi</b><span>ramen_wifi · пароль: miso2024</span></li>
+      </ul>
+    </div>
+
+    <form class="form reveal" id="resForm" novalidate>
+      <div class="field">
+        <label for="fName">Ім’я та прізвище</label>
+        <input type="text" id="fName" name="name" placeholder="Танака Кімічі" required>
+        <small class="err" data-for="fName"></small>
+      </div>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input type="tel" id="fPhone" name="phone" placeholder="+380 44 123 45 67" required>
+        <small class="err" data-for="fPhone"></small>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="fDate">Дата</label>
+          <input type="date" id="fDate" name="date" required>
+          <small class="err" data-for="fDate"></small>
+        </div>
+        <div class="field">
+          <label for="fTime">Час</label>
+          <input type="time" id="fTime" name="time" value="19:00" required>
+          <small class="err" data-for="fTime"></small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="fGuests">Гостей</label>
+          <input type="number" id="fGuests" name="guests" value="2" min="1" max="18" required>
+          <small class="err" data-for="fGuests"></small>
+        </div>
+        <div class="field">
+          <label for="fZone">Зал</label>
+          <select id="fZone" name="zone">
+            <option>Основний зал · 本館</option>
+            <option>Барная стійка · カウンター</option>
+            <option>Сад · 庭園</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Бажана база</label>
+        <div class="radios" id="radios">
+          <label class="radio"><input type="radio" name="base" value="shoyu" checked><span>醤油 Shoyu</span></label>
+          <label class="radio"><input type="radio" name="base" value="miso"><span>味噌 Miso</span></label>
+          <label class="radio"><input type="radio" name="base" value="tonkotsu"><span>豚骨 Tonkotsu</span></label>
+          <label class="radio"><input type="radio" name="base" value="spicy"><span>辛 Spicy</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="fNote">Побажання</label>
+        <textarea id="fNote" name="note" rows="3" placeholder="Без цибулі, дитяче крісло, алергія…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Забронювати</button>
+      <p class="form-ok" id="formOk" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand seal-only"><span class="brand-seal">福</span><b>RAMEN HABARU</b></div>
+      <p class="foot-note">Ресторан японської рамен-кухні.<br>Кінокава, кіптінг, тарілка — і жодного зайвого.</p>
+    </div>
+    <div>
+      <h4>Графік</h4>
+      <p>Пн–Чт · 11:00 – 23:00<br>Пт–Сб · 11:00 – 00:00<br>Нд · 12:00 – 22:00</p>
+    </div>
+    <div>
+      <h4>Контакти</h4>
+      <p>вул. Сакура, 12<br><a href="tel:+380441234567">+380 44 123 45 67</a><br><a href="mailto:hello@habaru.ramen">hello@habaru.ramen</a></p>
+    </div>
+    <div>
+      <h4>Стежте</h4>
+      <div class="social"><a href="#top">Instagram</a><a href="#top">Facebook</a><a href="#top">TikTok</a></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="year">2026</span> Хабару Рамен House</span>
+    <span class="jp-line">一期一会 · Будь-яка зустріч — єдиний раз</span>
+  </div>
+</footer>
+
+<!-- ============ CART ============ -->
+<div class="backdrop" id="backdrop" hidden></div>
+
+<aside class="cart" id="cartPanel" aria-label="Кошик" aria-hidden="true">
+  <div class="cart-head">
+    <div>
+      <p class="eyebrow">Ваше замовлення</p>
+      <h3>Кошик · 買い物</h3>
+    </div>
+    <button class="icon-btn" id="cartClose" aria-label="Закрити кошик">×</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-foot">
+    <div class="cart-row"><span>Доставка</span><span id="cartDelivery">самовивіз — безкоштовно</span></div>
+    <div class="cart-row cart-total"><span>Разом</span><b id="cartTotal">0 ₴</b></div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn" type="button" disabled>Оформити замовлення</button>
+    <p class="cart-hint">Оплата через <b>Монобанк</b> або <b>Приват24</b></p>
+  </div>
+</aside>
+
+<!-- ============ PAYMENT MODAL ============ -->
+<div class="modal" id="payModal" role="dialog" aria-modal="true" aria-labelledby="payTitle" aria-hidden="true">
+  <div class="modal-card" id="modalCard">
+    <button class="icon-btn modal-close" id="payClose" aria-label="Закрити">×</button>
+
+    <div class="pay-step is-on" data-step="1">
+      <p class="eyebrow">Оформлення</p>
+      <h3 id="payTitle">Оплата замовлення</h3>
+
+      <ul class="pay-summary" id="paySummary"></ul>
+
+      <form id="payForm" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="pName">Ім’я</label>
+            <input type="text" id="pName" placeholder="Танака Кімічі" required>
+            <small class="err" data-for="pName"></small>
+          </div>
+          <div class="field">
+            <label for="pPhone">Телефон</label>
+            <input type="tel" id="pPhone" placeholder="+380 67 123 45 67" required>
+            <small class="err" data-for="pPhone"></small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="pAddr">Адреса або самовивіз</label>
+          <input type="text" id="pAddr" placeholder="вул. Сакура, 12 · самовивіз">
+        </div>
+        <div class="field">
+          <label for="pNote">Коментар</label>
+          <textarea id="pNote" rows="2" placeholder="Без цибулі, під’їзд №3…"></textarea>
+        </div>
+
+        <span class="field-label">Спосіб оплати</span>
+        <div class="pay-methods">
+          <label class="pm">
+            <input type="radio" name="pm" value="mono" checked>
+            <span class="pm-logo lg-mono">mono</span>
+            <span class="pm-txt"><b>Монобанк</b><i>Картка · Apple Pay · QR</i><span class="pm-state">демо</span></span>
+            <span class="pm-mark"></span>
+          </label>
+          <label class="pm">
+            <input type="radio" name="pm" value="privat24">
+            <span class="pm-logo lg-p24">P24</span>
+            <span class="pm-txt"><b>Приват24</b><i>Картка · Гаманець · LiqPay</i><span class="pm-state">демо</span></span>
+            <span class="pm-mark"></span>
+          </label>
+        </div>
+
+        <div class="pay-total"><span>До сплати</span><b id="payTotal">0 ₴</b></div>
+        <button class="btn btn-primary btn-block" id="payBtn" type="submit">Оплатити</button>
+        <p class="pay-demo" id="payModeNote">Демо-режим · справжня оплата підключається через API бекенду</p>
+        <p class="err" id="payErr" role="alert"></p>
+      </form>
+    </div>
+
+    <div class="pay-step" data-step="2">
+      <div class="pay-head">
+        <span class="pm-logo lg-mono" id="payLogo">mono</span>
+        <div>
+          <b id="payBankName">Монобанк</b>
+          <i id="paySecure">Захищене з’єднання · 3-D Secure</i>
+        </div>
+      </div>
+      <div class="pay-bar"><i id="payBarFill"></i></div>
+      <ol class="pay-log" id="payLog"></ol>
+      <p class="pay-note">Не закривайте вікно — іде редирект до банку…</p>
+    </div>
+
+    <div class="pay-step" data-step="3">
+      <div class="success">
+        <svg class="check-svg" viewBox="0 0 96 96" aria-hidden="true">
+          <circle class="check-ring" cx="48" cy="48" r="42"/>
+          <path class="check-mark" d="M30 50l13 13 24-28"/>
+        </svg>
+        <h3>Оплату прийнято</h3>
+        <p id="payDoneTxt">Дякуємо! Рамен уже пішов на кухню.</p>
+      </div>
+      <div class="receipt" id="receipt"></div>
+      <button class="btn btn-primary btn-block" id="payDoneBtn" type="button">Готово</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<button class="to-top" id="toTop" aria-label="Догори">↑</button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
